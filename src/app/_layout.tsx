@@ -1,9 +1,8 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Tabs } from 'expo-router';
+import 'react-native-reanimated';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -14,11 +13,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
+      <Tabs>
+        <Tabs.Screen name="index" options={{title: 'Allocations', tabBarIcon:({size,color})=> <MaterialIcons name="account-tree" size={size} color={color}/>}}/>
+         <Tabs.Screen name="accounts" options={{title:'Acconts', tabBarIcon:({size,color})=> <MaterialIcons name="account-balance-wallet" size={size} color={color} />}} />
+      </Tabs>
     </ThemeProvider>
   );
 }
