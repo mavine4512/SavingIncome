@@ -3,7 +3,6 @@ import AccountListItem from './AccountListItem';
 
 
 export default function AccountsList(){
-    console.log('test')
     return(
            <FlatList
            data={[1,2,3]}
