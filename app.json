@@ -39,6 +39,22 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "buildToolsVersion": "35.0.0"
+          },
+          "ios": {
+            "name":"simdjson",
+            "configurations":["Debug","Release"],
+            "path":"../node_modules/@nozbe/simdjson",
+            "modular_headers":true
+          }
+        }
       ]
     ],
     "experiments": {
