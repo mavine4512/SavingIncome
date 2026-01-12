@@ -3,7 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "set EXPO_OFFLINE=true&&set SKIP_DEPENDENCY_VALIDATION=true&&expo start",
+    "start": "set EXPO_OFFLINE=true&&set SKIP_DEPENDENCY_VALIDATION=true&&expo start --dev-client",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "set EXPO_OFFLINE=true&&set SKIP_DEPENDENCY_VALIDATION=true&&expo start --android",
     "ios": "set EXPO_OFFLINE=true&&set SKIP_DEPENDENCY_VALIDATION=true&&expo start --ios",

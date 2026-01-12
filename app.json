@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.SavingIncome"
     },
     "android": {
       "adaptiveIcon": {
@@ -64,6 +65,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e73850d4-16fb-4bd9-b5f9-aab65b81db38"
+      }
+    },
+    "owner": "mavine"
   }
 }
