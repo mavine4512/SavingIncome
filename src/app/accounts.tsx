@@ -1,15 +1,33 @@
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import AccountsList from '../components/AccountsList';
+import database, { accountsCollection } from '../db';
+
 
 export default function AccountsScreen(){
     const [name, setName] = useState('');
     const [cap, setCap] = useState('');
     const [tap, setTap] = useState('');
 
-    const creatAccount =()=>{
+    const createAccount =()=>{
         console.log( 'create Account', name)
     }
+
+    const onRead = async () =>{
+        const accounts = await accountsCollection.query().fetch()
+
+        console.log('accounts',accounts)
+
+        // starting a transaction
+        await database.write(async () => {
+           await  accountsCollection.create((account)=>{
+                account.name = 'exampleText';
+                account.cap = 11.5;
+                account.tap = 21.1;
+            })
+        })
+    }
+
     return (
         <View style={{gap:5, padding:5}}>
             <View style={styles.header}>
@@ -25,7 +43,9 @@ export default function AccountsScreen(){
                 <TextInput value={tap} onChangeText={setTap} placeholder='TAP %' style={styles.input}/>
             </View>
 
-            <Button title='Add Account' onPress={creatAccount}/>
+            <Button title='Add Account' onPress={createAccount}/>
+
+            <Button title='Read' onPress={onRead} />
         </View>
     )
 }
