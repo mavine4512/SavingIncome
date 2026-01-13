@@ -42,6 +42,7 @@ export default function AccountsScreen(){
                 <Text  style={styles.name}>Name</Text>
                 <Text style={styles.name}>CAP</Text>
                 <Text style={styles.name}>TAP</Text>
+                <Text style={styles.name}>Actions</Text>
             </View>
             <AccountsList/>
 

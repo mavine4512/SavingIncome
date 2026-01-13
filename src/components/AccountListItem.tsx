@@ -1,16 +1,30 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { withObservables } from '@nozbe/watermelondb/react';
 import { StyleSheet, Text, View } from 'react-native';
-import Account from '../model/Account';
+import database from '../db';
 
 type AccountLitItem ={
     account: Account;
 }
  function AccountListItem({account}: AccountLitItem){
+
+    const onDelete = async ()=>{
+        await database.write( async() => { 
+            await account.markAsDeleted();
+        })
+        
+    };
     return(
         <View style={styles.container}>
             <Text style={styles.name}>{account.name}</Text>
             <Text style={styles.percentage}>{account.cap}</Text> 
             <Text style={styles.percentage}>{account.tap}</Text>
+            <MaterialCommunityIcons 
+            name="delete-empty-outline" 
+            size={18} 
+            color="red"
+            onPress={onDelete}
+            />
         </View>
     )
 }
@@ -31,6 +45,9 @@ container:{
 },
 name:{
     fontWeight:'bold',
+    flex:1
 },
-percentage:{}
+percentage:{
+    flex:1
+}
 })
