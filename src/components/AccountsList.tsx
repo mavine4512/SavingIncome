@@ -1,22 +1,11 @@
-import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { accountsCollection } from '../db';
-import Account from '../model/Account';
 import AccountListItem from './AccountListItem';
 
-export default function AccountsList(){
-    const [accounts, setAccounts] = useState<Account[]>([]);
+import { withObservables } from '@nozbe/watermelondb/react';
+import Account from '../model/Account';
 
-    useEffect(()=> {
-        const fetchAccounts = async ()=>{
-            const accountsData: Account[] = await accountsCollection.query().fetch()
-            setAccounts(accountsData)
-        }
-        fetchAccounts()
-    },[]);
-
-    console.log('accounts',accounts)
-
+function AccountsList({accounts}:{accounts: Account[]}){
     return(
            <FlatList
            data={accounts}
@@ -25,3 +14,16 @@ export default function AccountsList(){
            />
     )
 }
+
+const enhance = withObservables([], () => ({
+    // fetch and update data of account on ui
+  accounts:  accountsCollection.query(),
+}));
+
+export default enhance(AccountsList)
+
+// this is also working
+// export default withObservables([], () => ({
+//     // fetch data of account
+//   accounts:  accountsCollection.query(),
+// }))(AccountsList);
