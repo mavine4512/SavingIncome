@@ -1,11 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Account from '../model/Account';
 
-export default function AccountListItem(){
+type AccountLitItem ={
+    account: Account;
+}
+export default function AccountListItem({account}: AccountLitItem){
     return(
         <View style={styles.container}>
-            <Text style={styles.name}>Profile</Text>
-            <Text style={styles.percentage}>10%</Text> 
-            <Text style={styles.percentage}>20%</Text>
+            <Text style={styles.name}>{account.name}</Text>
+            <Text style={styles.percentage}>{account.cap}</Text> 
+            <Text style={styles.percentage}>{account.tap}</Text>
         </View>
     )
 }

@@ -6,26 +6,26 @@ import database, { accountsCollection } from '../db';
 
 export default function AccountsScreen(){
     const [name, setName] = useState('');
-    const [cap, setCap] = useState('');
+    const [cap, setCap] = useState(''); //string
     const [tap, setTap] = useState('');
 
-    const createAccount =()=>{
-        console.log( 'create Account', name)
-    }
+    const createAccount = async()=>{
 
-    const onRead = async () =>{
-        const accounts = await accountsCollection.query().fetch()
-
-        console.log('accounts',accounts)
-
-        // starting a transaction
+        // starting a transaction, create
         await database.write(async () => {
-           await  accountsCollection.create((account)=>{
-                account.name = 'exampleText';
-                account.cap = 11.5;
-                account.tap = 21.1;
+           await accountsCollection.create((account)=>{
+                account.name = name;
+                account.cap = Number.parseFloat(cap);// changed to number
+                account.tap = Number.parseFloat(tap);
             })
         })
+
+         console.log( 'create Account', name);
+        //  resetting the fields to nothing
+         setName('');
+         setCap('');
+         setTap('');
+
     }
 
     return (
@@ -44,8 +44,6 @@ export default function AccountsScreen(){
             </View>
 
             <Button title='Add Account' onPress={createAccount}/>
-
-            <Button title='Read' onPress={onRead} />
         </View>
     )
 }
