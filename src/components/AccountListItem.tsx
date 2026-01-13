@@ -1,10 +1,11 @@
+import { withObservables } from '@nozbe/watermelondb/react';
 import { StyleSheet, Text, View } from 'react-native';
 import Account from '../model/Account';
 
 type AccountLitItem ={
     account: Account;
 }
-export default function AccountListItem({account}: AccountLitItem){
+ function AccountListItem({account}: AccountLitItem){
     return(
         <View style={styles.container}>
             <Text style={styles.name}>{account.name}</Text>
@@ -13,6 +14,12 @@ export default function AccountListItem({account}: AccountLitItem){
         </View>
     )
 }
+
+const enhance = withObservables(['account'],({account}: AccountLitItem)=>({
+    account,
+}))
+
+export default enhance(AccountListItem);
 
 const styles = StyleSheet.create({
 container:{

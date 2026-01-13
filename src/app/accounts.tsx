@@ -10,7 +10,6 @@ export default function AccountsScreen(){
     const [tap, setTap] = useState('');
 
     const createAccount = async()=>{
-
         // starting a transaction, create
         await database.write(async () => {
            await accountsCollection.create((account)=>{
@@ -19,13 +18,22 @@ export default function AccountsScreen(){
                 account.tap = Number.parseFloat(tap);
             })
         })
-
          console.log( 'create Account', name);
         //  resetting the fields to nothing
          setName('');
          setCap('');
          setTap('');
+    }
 
+    const onTest = async()=>{
+        await database.write(async ()=>{
+            const accounts = await accountsCollection.query().fetch();
+            const account = accounts[0];
+            account.update((updatedAccount)=>{
+                updatedAccount.name = 'school1 ';
+            })
+        })
+        console.log('update name')
     }
 
     return (
@@ -44,6 +52,7 @@ export default function AccountsScreen(){
             </View>
 
             <Button title='Add Account' onPress={createAccount}/>
+            <Button title='Test' onPress={onTest}/>
         </View>
     )
 }
