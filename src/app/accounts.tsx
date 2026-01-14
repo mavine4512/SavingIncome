@@ -6,27 +6,35 @@ import database, { accountsCollection } from '../db';
 
 export default function AccountsScreen(){
     const [name, setName] = useState('');
-    const [cap, setCap] = useState('');
+    const [cap, setCap] = useState(''); //string
     const [tap, setTap] = useState('');
 
-    const createAccount =()=>{
-        console.log( 'create Account', name)
-    }
-
-    const onRead = async () =>{
-        const accounts = await accountsCollection.query().fetch()
-
-        console.log('accounts',accounts)
-
-        // starting a transaction
+    const createAccount = async()=>{
+        // starting a transaction, create
         await database.write(async () => {
-           await  accountsCollection.create((account)=>{
-                account.name = 'exampleText';
-                account.cap = 11.5;
-                account.tap = 21.1;
+           await accountsCollection.create((account)=>{
+                account.name = name;
+                account.cap = Number.parseFloat(cap);// changed to number
+                account.tap = Number.parseFloat(tap);
             })
         })
+         console.log( 'create Account', name);
+        //  resetting the fields to nothing
+         setName('');
+         setCap('');
+         setTap('');
     }
+
+    // const onTest = async()=>{
+    //     await database.write(async ()=>{
+    //         const accounts = await accountsCollection.query().fetch();
+    //         const account = accounts[0];
+    //         account.update((updatedAccount)=>{
+    //             updatedAccount.name = 'school1 ';
+    //         })
+    //     })
+    //     console.log('update name')
+    // }
 
     return (
         <View style={{gap:5, padding:5}}>
@@ -34,6 +42,7 @@ export default function AccountsScreen(){
                 <Text  style={styles.name}>Name</Text>
                 <Text style={styles.name}>CAP</Text>
                 <Text style={styles.name}>TAP</Text>
+                <Text style={styles.name}>Actions</Text>
             </View>
             <AccountsList/>
 
@@ -44,8 +53,6 @@ export default function AccountsScreen(){
             </View>
 
             <Button title='Add Account' onPress={createAccount}/>
-
-            <Button title='Read' onPress={onRead} />
         </View>
     )
 }

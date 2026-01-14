@@ -1,13 +1,29 @@
 import { FlatList } from 'react-native';
+import { accountsCollection } from '../db';
 import AccountListItem from './AccountListItem';
 
+import { withObservables } from '@nozbe/watermelondb/react';
+import Account from '../model/Account';
 
-export default function AccountsList(){
+function AccountsList({accounts}:{accounts: Account[]}){
     return(
            <FlatList
-           data={[1,2,3]}
+           data={accounts}
            contentContainerStyle={{gap:5}}
-           renderItem={()=><AccountListItem/>}
+           renderItem={({item})=><AccountListItem account={item}/>}
            />
     )
 }
+
+const enhance = withObservables([], () => ({
+    // fetch and update data of account on ui
+  accounts:  accountsCollection.query(),
+}));
+
+export default enhance(AccountsList)
+
+// this is also working
+// export default withObservables([], () => ({
+//     // fetch data of account
+//   accounts:  accountsCollection.query(),
+// }))(AccountsList);
