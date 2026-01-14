@@ -25,16 +25,16 @@ export default function AccountsScreen(){
          setTap('');
     }
 
-    const onTest = async()=>{
-        await database.write(async ()=>{
-            const accounts = await accountsCollection.query().fetch();
-            const account = accounts[0];
-            account.update((updatedAccount)=>{
-                updatedAccount.name = 'school1 ';
-            })
-        })
-        console.log('update name')
-    }
+    // const onTest = async()=>{
+    //     await database.write(async ()=>{
+    //         const accounts = await accountsCollection.query().fetch();
+    //         const account = accounts[0];
+    //         account.update((updatedAccount)=>{
+    //             updatedAccount.name = 'school1 ';
+    //         })
+    //     })
+    //     console.log('update name')
+    // }
 
     return (
         <View style={{gap:5, padding:5}}>
@@ -53,7 +53,6 @@ export default function AccountsScreen(){
             </View>
 
             <Button title='Add Account' onPress={createAccount}/>
-            <Button title='Test' onPress={onTest}/>
         </View>
     )
 }
