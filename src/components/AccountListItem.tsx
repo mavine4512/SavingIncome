@@ -2,6 +2,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { withObservables } from '@nozbe/watermelondb/react';
 import { StyleSheet, Text, View } from 'react-native';
 import database from '../db';
+import Account from '../model/Account';
 
 type AccountLitItem ={
     account: Account;
@@ -12,7 +13,6 @@ type AccountLitItem ={
         await database.write( async() => { 
             await account.markAsDeleted();
         })
-        
     };
     return(
         <View style={styles.container}>
