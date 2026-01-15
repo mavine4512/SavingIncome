@@ -10,6 +10,7 @@ function AccountsList({accounts}:{accounts: Account[]}){
            <FlatList
            data={accounts}
            contentContainerStyle={{gap:5}}
+           keyExtractor={(item) => item.id}
            renderItem={({item})=><AccountListItem account={item}/>}
            />
     )

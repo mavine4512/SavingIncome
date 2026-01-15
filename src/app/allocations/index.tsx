@@ -1,13 +1,17 @@
+import AllocationList from '@/src/components/AllocationList';
 import { Link, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{title:'Allocations'}}/>
-      <Text>Allocation</Text>
+
       <Link href={'/allocations/new'}>Go to newAllocation</Link>
+      
+      <AllocationList/>
+
       <StatusBar style='auto'/>
     </View>
   );

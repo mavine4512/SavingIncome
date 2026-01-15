@@ -16,7 +16,7 @@ export default appSchema({
         columns:[
             {name: 'created_at', type: 'number'},
             {name: 'income', type: 'number'},
-    ]
+        ]
     }),
   ]
 }) 
