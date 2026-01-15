@@ -1,5 +1,5 @@
 import database, { allocationsCollection } from '@/src/db';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -12,6 +12,8 @@ export default function NewAllocationScreen(){
                 newAllocation.income = Number.parseFloat(income);
             });
         });
+        setIncome(''),
+        router.back();
     };
 
     return (

@@ -1,3 +1,4 @@
+import { Q } from '@nozbe/watermelondb'
 import { withObservables } from '@nozbe/watermelondb/react'
 import React from 'react'
 import { FlatList } from 'react-native'
@@ -10,6 +11,7 @@ import AllocationListItem from './AllocationListItem'
     <FlatList
         data={allocations}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{gap:5, padding:10}}
         renderItem={({item})=> (<AllocationListItem allocation={item}/>)}
     />
   )
@@ -17,7 +19,7 @@ import AllocationListItem from './AllocationListItem'
 
 const enhance = withObservables([], () => ({
     // fetch and update data of account on ui
-  allocations: allocationsCollection.query(),
+  allocations: allocationsCollection.query(Q.sortBy('created_at', Q.desc)),
 }));
 
 export default enhance(AllocationList);
